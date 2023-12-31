@@ -29,10 +29,19 @@ impl Colors {
     }
 }
 
+impl Dimensions {
+    fn print(&self) {
+        println!("width: {:?}", self.width);
+        println!("height: {:?}", self.height);
+        println!("depth: {:?}", self.depth);
+    }
+}
+
 impl ShippingBox {
     fn print(&self) {
-        println!("{:?}", self);
-        self.color.print()
+        println!("{:?}", self.weight);
+        self.color.print();
+        self.dimensions.print();
     }
 
     fn new(weight: f64, color: Colors, dimensions: Dimensions) -> Self {
