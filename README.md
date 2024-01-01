@@ -18,6 +18,13 @@ Resume [here](https://youtu.be/lzKeecy4OmQ?t=17936)
 
 `cargo run -q --bin a1`
 
+## Generate documentation
+- add `/// documentation here` above all that needs to be documented 
+- then run `cargo doc --open`
+    - not open? using WSL? 
+    - add `export BROWSER="/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"` to `.bashrc` or `.zshrc`
+    - then restart terminal
+
 ## Type
 
 ### enum
