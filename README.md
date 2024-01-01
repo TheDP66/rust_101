@@ -1,4 +1,4 @@
-Resume [here](https://youtu.be/lzKeecy4OmQ?t=17936)
+Resume [here](https://youtu.be/lzKeecy4OmQ?t=20268)
 
 ## Create application
 
