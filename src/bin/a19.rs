@@ -17,7 +17,7 @@ impl ProtectedLocation {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 struct Database;
 
 impl Database {
@@ -40,19 +40,21 @@ impl Database {
         }
     }
 
-    fn get_keycard(&self, employee: &Employee) -> Result<KeyCard, String>{
+    fn get_keycard(&self, employee: &Employee) -> Result<KeyCard, String> {
         match employee.name.as_str() {
-            "Anita" => Ok(KeyCard {access_level: 1000}),
-            "Brody" => Ok(KeyCard {access_level: 500}),
+            "Anita" => Ok(KeyCard { access_level: 1000 }),
+            "Brody" => Ok(KeyCard { access_level: 500 }),
             other => Err(format!("{other} doesn't have a keycard")),
         }
     }
 }
 
+#[derive(Clone, Debug)]
 struct Employee {
     name: String,
 }
 
+#[derive(Debug)]
 struct KeyCard {
     access_level: u16,
 }
@@ -70,9 +72,15 @@ fn authorize(
 
     let employee = db.find_employee(employee_name)?;
 
-    let keycard = db.get_keycard(&employee);
+    let keycard = db.get_keycard(&employee)?;
+
+    if keycard.access_level >= location.require_access_level() {
+        Ok(AuthorizationStatus::Allow)
+    } else {
+        Ok(AuthorizationStatus::Deny)
+    }
 }
 
 fn main() {
-    let anita_authorized = authorize("Anita", ProtectedLocation::Warehouse)
+    let anita_authorized = authorize("Anita", ProtectedLocation::Warehouse);
 }
